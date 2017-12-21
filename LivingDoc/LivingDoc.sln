@@ -7,6 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivingDoc.MDMerge", "Living
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.LivingDoc.MDMerge", "Tests.LivingDoc.MDMerge\Tests.LivingDoc.MDMerge.csproj", "{03734F60-B185-4D32-B953-1653850C1524}"
 EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "LivingDoc.UmlGenerator", "LivingDoc.UmlGenerator\LivingDoc.UmlGenerator.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C98CDC93-A640-459E-B72B-FE1B1F048E72}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "LivingDoc.MDLinting", "LivingDoc.MDLinting\LivingDoc.MDLinting.pssproj", "{3777CCFC-F45E-4876-BCB2-A83922AB0D61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +30,14 @@ Global
 		{03734F60-B185-4D32-B953-1653850C1524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03734F60-B185-4D32-B953-1653850C1524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03734F60-B185-4D32-B953-1653850C1524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3777CCFC-F45E-4876-BCB2-A83922AB0D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3777CCFC-F45E-4876-BCB2-A83922AB0D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3777CCFC-F45E-4876-BCB2-A83922AB0D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3777CCFC-F45E-4876-BCB2-A83922AB0D61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

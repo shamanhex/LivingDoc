@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MDMergerTests.cs" />
+    <Compile Include="MDStructTests.cs" />
     <Compile Include="ProgramTests.cs" />
     <Compile Include="MDParagraphTests.cs" />
     <Compile Include="MDParserTests.cs" />

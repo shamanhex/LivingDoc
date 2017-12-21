@@ -8,7 +8,7 @@ namespace LivingDoc.MDMerge
 {
     public class MDMerger
     {
-        public static MDParagraph Merge(string mdStruct, params MDParagraph[] paragraphs)
+        public static MDParagraph Merge(MDStruct mdStruct, params MDParagraph[] paragraphs)
         {
             if (paragraphs == null || paragraphs.Length == 0)
             {
@@ -36,14 +36,14 @@ namespace LivingDoc.MDMerge
 
             MDParagraph merged = new MDParagraph(level, header);
 
-            merged.Text = UnionParagraphsText(paragraphs);
+            merged.Text = MergeParagraphsText(paragraphs, mdStruct == null ? MDMergeStrategy.Union : mdStruct.MergeStrategy);
 
-            UnionSubparagraphs(merged.SubParagraphs, paragraphs);
+            UnionSubparagraphs(merged.SubParagraphs, paragraphs, mdStruct == null ? null : mdStruct.Substruct);
 
             return merged;
         }
 
-        private static void UnionSubparagraphs(List<MDParagraph> subParagraphs, MDParagraph[] paragraphs)
+        private static void UnionSubparagraphs(List<MDParagraph> subParagraphs, MDParagraph[] paragraphs, List<MDStruct> substruct)
         {
             List<string> totalHeaderList = new List<string>();
 
@@ -59,7 +59,27 @@ namespace LivingDoc.MDMerge
                 }
             }
 
-            foreach (string header in totalHeaderList)
+            List<string> sortedHeaderList = totalHeaderList;
+
+            if (substruct != null)
+            {
+                sortedHeaderList = new List<string>();
+
+                foreach (MDStruct mdStruct in substruct)
+                {
+                    string[] matchHeaders = totalHeaderList.Where(header => mdStruct.IsMatchHeader(header)).ToArray();
+
+                    if (matchHeaders.Length == 0)
+                        continue;
+
+                    sortedHeaderList.AddRange(matchHeaders);
+                    totalHeaderList.RemoveAll(x => matchHeaders.Contains(x));
+                }
+
+                sortedHeaderList.AddRange(totalHeaderList);
+            }
+
+            foreach (string header in sortedHeaderList)
             {
                 List<MDParagraph> allSubParagraphs = new List<MDParagraph>();
                 foreach (MDParagraph p in paragraphs)
@@ -67,6 +87,40 @@ namespace LivingDoc.MDMerge
                     allSubParagraphs.AddRange(p.SubParagraphs.Where(sp => string.Compare(sp.Header, header, ignoreCase: true) == 0));
                 }
                 subParagraphs.Add(Merge(null, allSubParagraphs.ToArray()));
+            }
+        }
+
+        private static List<string> MergeParagraphsText(MDParagraph[] paragraphs, MDMergeStrategy strategy)
+        {
+            switch (strategy)
+            {
+                case MDMergeStrategy.Union:
+                    {
+                        return UnionParagraphsText(paragraphs);
+                    }
+                case MDMergeStrategy.First:
+                    {
+                        if (paragraphs.Length == 0)
+                            return new List<string>();
+                        IEnumerable<MDParagraph> nonEmptyPragraphs = paragraphs.Where(p => p.Text != null && p.Text.Count > 0);
+                        if (nonEmptyPragraphs.Count() > 0)
+                        {
+                            return nonEmptyPragraphs.First().Text;
+                        }
+                        return new List<string>();
+                    }
+                case MDMergeStrategy.SingleOnly:
+                    {
+                        if (paragraphs.Length == 0)
+                            return new List<string>();
+                        IEnumerable<MDParagraph> nonEmptyPragraphs = paragraphs.Where(p => p.Text != null && p.Text.Count > 0);
+                        if (nonEmptyPragraphs.Count() > 1)
+                        {
+                            throw new InvalidOperationException("Ошибка: Найдено более одного непутого абзаца для объединения. Стратегия: SingleOnly");
+                        }
+                        return nonEmptyPragraphs.First().Text;
+                    }
+                default: throw new NotImplementedException(string.Format("Стратегия {0} не реализована.", strategy));
             }
         }
 
