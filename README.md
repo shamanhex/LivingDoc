@@ -5,10 +5,8 @@
 Функционал:
 [X] Проверка синтаксиса Markdown
 [X] Проверка орфографии MD файлов 
-[ ] Построение изображений диаграмм из текстового описания (.uml.txt => *.uml.png)
+[X] Построение изображений диаграмм из текстового описания (.uml.txt => *.uml.png)
 [ ] 
-
-
 
 ## Линтинг MD файлов документации (LivingDoc.MDLinting)
 
@@ -16,9 +14,9 @@
  
 Внешние зависимости:
 
-	- [NodeJS](https://nodejs.org/en/download/current/)
-	- NodeJS: [markdownlint-cli] (https://www.npmjs.com/package/markdownlint-cli) (```npm i markdownlint-cli -g```)
-	- NodeJS: [markdown-spellcheck](https://www.npmjs.com/package/markdown-spellcheck) (```npm i markdown-spellcheck -g```)
+- [NodeJS](https://nodejs.org/en/download/current/)
+- NodeJS: [markdownlint-cli] (https://www.npmjs.com/package/markdownlint-cli) (```npm i markdownlint-cli -g```)
+- NodeJS: [markdown-spellcheck](https://www.npmjs.com/package/markdown-spellcheck) (```npm i markdown-spellcheck -g```)
 
 ### Пример проверки документации в проекте
 ``` PowerShell
@@ -30,8 +28,6 @@
 Система зайдёт в указанную папку (Path) и найдёт все файлы *.md. Затем, каждый файл будет проверен на соответствие 
 стилистике Markdown (по правилам указанным в .\Examples\markdownlint.cfg.json), а так же будет проверена его орфография
 (система возьмёт все словари из папки .\Examples\Dics).
-
-
 
 ### Пример посроения свох словарей
 

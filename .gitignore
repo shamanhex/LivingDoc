@@ -286,5 +286,6 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
-/Docs/СР. Потоки данных.vsdx
 /Docs
+/Examples
+/LivingDoc Concept.md
