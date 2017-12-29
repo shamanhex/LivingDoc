@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="LivingDoc.Md2Html.ps1" />
     <Compile Include="LivingDoc.MDLint.ps1" />
     <Compile Include="LivingDoc.UmlGenerator.ps1" />
     <Compile Include="plantuml.jar" />

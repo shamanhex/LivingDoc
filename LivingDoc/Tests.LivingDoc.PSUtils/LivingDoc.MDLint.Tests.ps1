@@ -1,5 +1,6 @@
 # include test cript
-. ..\LivingDoc.PSUtils\LivingDoc.MDLint.ps1 -Path "TEST"
+$location = Split-Path $script:MyInvocation.MyCommand.Path -Parent
+. "$location\..\LivingDoc.PSUtils\LivingDoc.MDLint.ps1" -Path "TEST"
 
 Describe "LivingDoc.MDLint tests" {
 

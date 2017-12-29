@@ -1,5 +1,6 @@
 ﻿# include test cript
-. ..\LivingDoc.PSUtils\LivingDoc.UmlGenerator.ps1 -UmlTxtPath "TEST"
+$location = Split-Path $script:MyInvocation.MyCommand.Path -Parent
+. "$location\..\LivingDoc.PSUtils\LivingDoc.UmlGenerator.ps1" -UmlTxtPath "TEST"
 
 Describe "LivingDoc.UmlGenerator tests" {
 
@@ -32,29 +33,20 @@ Describe "LivingDoc.UmlGenerator tests" {
 	Context "Acceptance tests" {
 
 		It "Ex01: Trivial test for plantuml.jar" {
-			Copy-Item ".\UmlGeneratorTestFiles\Ex01_TrivialTest" "TestDrive:\Ex01_TrivialTest\" -Recurse
+			Copy-Item "$location\UmlGeneratorTestFiles\Ex01_TrivialTest" "TestDrive:\Ex01_TrivialTest\" -Recurse
 			
-			..\LivingDoc.PSUtils\LivingDoc.UmlGenerator.ps1 -UmlTxtPath "TestDrive:\Ex01_TrivialTest\" 
+			& "$location\..\LivingDoc.PSUtils\LivingDoc.UmlGenerator.ps1" -UmlTxtPath "TestDrive:\Ex01_TrivialTest\" 
 
 			"TestDrive:\Ex01_TrivialTest\Trivial.uml.png" | Should -Exist
 		}
 
 		It "Ex02: Generate class diagram" {
 			New-Item "TestDrive:\Ex02_ClassDiagram" -type Directory
-			Copy-Item ".\UmlGeneratorTestFiles\Ex02_ClassDiagram\ClassDiagram.uml.txt" "TestDrive:\Ex02_ClassDiagram\ClassDiagram.uml.txt" -Recurse
+			Copy-Item "$location\UmlGeneratorTestFiles\Ex02_ClassDiagram\ClassDiagram.uml.txt" "TestDrive:\Ex02_ClassDiagram\ClassDiagram.uml.txt" -Recurse
 			
-			..\LivingDoc.PSUtils\LivingDoc.UmlGenerator.ps1 -UmlTxtPath "TestDrive:\Ex02_ClassDiagram\ClassDiagram.uml.txt" 
+			& "$location\..\LivingDoc.PSUtils\LivingDoc.UmlGenerator.ps1" -UmlTxtPath "TestDrive:\Ex02_ClassDiagram\ClassDiagram.uml.txt" 
 
 			"TestDrive:\Ex02_ClassDiagram\ClassDiagram.uml.png" | Should -Exist
-		}
-
-		It "Ex03: Generate component diagram" {
-			New-Item "TestDrive:\Ex03_ComponentDiagram" -type Directory
-			Copy-Item ".\UmlGeneratorTestFiles\Ex03_ComponentDiagram\ComponentDiagram.uml.txt" "TestDrive:\Ex03_ComponentDiagram\ComponentDiagram.uml.txt" -Recurse
-			
-			..\LivingDoc.PSUtils\LivingDoc.UmlGenerator.ps1 -UmlTxtPath "TestDrive:\Ex03_ComponentDiagram\ComponentDiagram.uml.txt" 
-
-			"TestDrive:\Ex03_ComponentDiagram\ComponentDiagram.uml.png" | Should -Exist
 		}
 	}
 
